@@ -94,7 +94,9 @@ class Radio(CommonPlaySkill):
         except Exception as e:
             self.log.error("Error: {0}".format(e))
             self.log.info("Traceback: {}".format(traceback.format_exc()))
-            self.speak_dialog('could.not.play')
+            dialog = "could.not.play"
+            gui = None
+            return self.end_session(dialog=dialog, gui=gui)
 
     def stop(self):
         # Stop download process if it's running.
@@ -136,5 +138,5 @@ class Radio(CommonPlaySkill):
             return False
 
 
-def create_skill():
-    return Radio()
+def create_skill(skill_id: str):
+    return Radio(skill_id=skill_id)
